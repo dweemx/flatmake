@@ -1,4 +1,4 @@
-# flatmake
+# Flatmake
 <p align="center">
 
 <a href="https://pypi.python.org/pypi/flatmake">
@@ -7,8 +7,10 @@
 </p>
 A variety of utilities to build high-level flatbuffers structures
 
-## Features
--   TODO
+## Data Types
+- FloatArray
+- RGBTripleArray
+- Coordinates2D
 
 # Credits
 This package was created with Cookiecutter and the `cs01/cookiecutter-pypackage` project template.
