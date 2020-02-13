@@ -1,1 +1,1 @@
-"""Unit test package for pyfbs."""
+"""Unit test package for flatmake."""

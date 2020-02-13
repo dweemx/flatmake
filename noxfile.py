@@ -23,7 +23,7 @@ def tests(session):
     tests = session.posargs or ["tests"]
     session.run(
         "pytest",
-        "--cov=pyfbs",
+        "--cov=flatmake",
         "--cov-config",
         ".coveragerc",
         "--cov-report=",

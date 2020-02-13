@@ -1,4 +1,4 @@
-"""Top-level package for pyfbs."""
+"""Top-level package for flatmake."""
 
 __author__ = """Maxime De Waegeneer"""
 __email__ = 'mdewaegeneer@gmail.com'

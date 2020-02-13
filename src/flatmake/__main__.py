@@ -1,5 +1,5 @@
 import sys
-from pyfbs.cli import main  # noqa
+from flatmake.cli import main  # noqa
 
 
 if __name__ == "__main__":
