@@ -1,4 +1,4 @@
-include './array_float.fbs';
+include './float_array.fbs';
 
 namespace Dim;
 
