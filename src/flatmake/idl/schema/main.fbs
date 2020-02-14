@@ -1,3 +1,4 @@
+include './ubyte_array.fbs';
 include './float_array.fbs';
 include './coordinates_2d.fbs';
 include './rgb_triple_array.fbs';
@@ -5,6 +6,7 @@ include './rgb_triple_array.fbs';
 namespace Dim;
 
 table Dim {
+    ubyteArray: UByteArray;
     floatArray: FloatArray;
     rgbTripleArray: RGBTripleArray;
     coordinates2D: Coordinates2D;

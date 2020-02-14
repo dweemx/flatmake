@@ -42,11 +42,20 @@ Dim.Dim.getRootAsDim = function(bb, obj) {
 };
 
 /**
+ * @param {Dim.UByteArray=} obj
+ * @returns {Dim.UByteArray|null}
+ */
+Dim.Dim.prototype.ubyteArray = function(obj) {
+  var offset = this.bb.__offset(this.bb_pos, 4);
+  return offset ? (obj || new Dim.UByteArray).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
+};
+
+/**
  * @param {Dim.FloatArray=} obj
  * @returns {Dim.FloatArray|null}
  */
 Dim.Dim.prototype.floatArray = function(obj) {
-  var offset = this.bb.__offset(this.bb_pos, 4);
+  var offset = this.bb.__offset(this.bb_pos, 6);
   return offset ? (obj || new Dim.FloatArray).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
 };
 
@@ -55,7 +64,7 @@ Dim.Dim.prototype.floatArray = function(obj) {
  * @returns {Dim.RGBTripleArray|null}
  */
 Dim.Dim.prototype.rgbTripleArray = function(obj) {
-  var offset = this.bb.__offset(this.bb_pos, 6);
+  var offset = this.bb.__offset(this.bb_pos, 8);
   return offset ? (obj || new Dim.RGBTripleArray).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
 };
 
@@ -64,7 +73,7 @@ Dim.Dim.prototype.rgbTripleArray = function(obj) {
  * @returns {Dim.Coordinates2D|null}
  */
 Dim.Dim.prototype.coordinates2D = function(obj) {
-  var offset = this.bb.__offset(this.bb_pos, 8);
+  var offset = this.bb.__offset(this.bb_pos, 10);
   return offset ? (obj || new Dim.Coordinates2D).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
 };
 
@@ -72,7 +81,15 @@ Dim.Dim.prototype.coordinates2D = function(obj) {
  * @param {flatbuffers.Builder} builder
  */
 Dim.Dim.startDim = function(builder) {
-  builder.startObject(3);
+  builder.startObject(4);
+};
+
+/**
+ * @param {flatbuffers.Builder} builder
+ * @param {flatbuffers.Offset} ubyteArrayOffset
+ */
+Dim.Dim.addUbyteArray = function(builder, ubyteArrayOffset) {
+  builder.addFieldOffset(0, ubyteArrayOffset, 0);
 };
 
 /**
@@ -80,7 +97,7 @@ Dim.Dim.startDim = function(builder) {
  * @param {flatbuffers.Offset} floatArrayOffset
  */
 Dim.Dim.addFloatArray = function(builder, floatArrayOffset) {
-  builder.addFieldOffset(0, floatArrayOffset, 0);
+  builder.addFieldOffset(1, floatArrayOffset, 0);
 };
 
 /**
@@ -88,7 +105,7 @@ Dim.Dim.addFloatArray = function(builder, floatArrayOffset) {
  * @param {flatbuffers.Offset} rgbTripleArrayOffset
  */
 Dim.Dim.addRgbTripleArray = function(builder, rgbTripleArrayOffset) {
-  builder.addFieldOffset(1, rgbTripleArrayOffset, 0);
+  builder.addFieldOffset(2, rgbTripleArrayOffset, 0);
 };
 
 /**
@@ -96,7 +113,7 @@ Dim.Dim.addRgbTripleArray = function(builder, rgbTripleArrayOffset) {
  * @param {flatbuffers.Offset} coordinates2DOffset
  */
 Dim.Dim.addCoordinates2D = function(builder, coordinates2DOffset) {
-  builder.addFieldOffset(2, coordinates2DOffset, 0);
+  builder.addFieldOffset(3, coordinates2DOffset, 0);
 };
 
 /**

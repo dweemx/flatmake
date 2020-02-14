@@ -19,8 +19,19 @@ class Dim(object):
         self._tab = flatbuffers.table.Table(buf, pos)
 
     # Dim
-    def FloatArray(self):
+    def UbyteArray(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
+        if o != 0:
+            x = self._tab.Indirect(o + self._tab.Pos)
+            from .UByteArray import UByteArray
+            obj = UByteArray()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
+
+    # Dim
+    def FloatArray(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
         if o != 0:
             x = self._tab.Indirect(o + self._tab.Pos)
             from .FloatArray import FloatArray
@@ -31,7 +42,7 @@ class Dim(object):
 
     # Dim
     def RgbTripleArray(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
         if o != 0:
             x = self._tab.Indirect(o + self._tab.Pos)
             from .RGBTripleArray import RGBTripleArray
@@ -42,7 +53,7 @@ class Dim(object):
 
     # Dim
     def Coordinates2D(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
         if o != 0:
             x = self._tab.Indirect(o + self._tab.Pos)
             from .Coordinates2D import Coordinates2D
@@ -51,8 +62,9 @@ class Dim(object):
             return obj
         return None
 
-def DimStart(builder): builder.StartObject(3)
-def DimAddFloatArray(builder, floatArray): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(floatArray), 0)
-def DimAddRgbTripleArray(builder, rgbTripleArray): builder.PrependUOffsetTRelativeSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(rgbTripleArray), 0)
-def DimAddCoordinates2D(builder, coordinates2D): builder.PrependUOffsetTRelativeSlot(2, flatbuffers.number_types.UOffsetTFlags.py_type(coordinates2D), 0)
+def DimStart(builder): builder.StartObject(4)
+def DimAddUbyteArray(builder, ubyteArray): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(ubyteArray), 0)
+def DimAddFloatArray(builder, floatArray): builder.PrependUOffsetTRelativeSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(floatArray), 0)
+def DimAddRgbTripleArray(builder, rgbTripleArray): builder.PrependUOffsetTRelativeSlot(2, flatbuffers.number_types.UOffsetTFlags.py_type(rgbTripleArray), 0)
+def DimAddCoordinates2D(builder, coordinates2D): builder.PrependUOffsetTRelativeSlot(3, flatbuffers.number_types.UOffsetTFlags.py_type(coordinates2D), 0)
 def DimEnd(builder): return builder.EndObject()
