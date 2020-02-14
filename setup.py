@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
-from setuptools import setup, find_packages  # type: ignore
+import glob
+from setuptools import setup, find_packages
+import os
+import setuptools
 
 with open("README.md") as readme_file:
     readme = readme_file.read()
@@ -25,8 +28,10 @@ setup(
     include_package_data=True,
     keywords="flatmake",
     name="flatmake",
-    package_dir={"": "src"},
-    packages=find_packages(include=["src/flatmake", "src/flatmake.*"]),
+    packages=setuptools.find_packages(where='src'),
+    package_dir={'': 'src'},
+    py_modules=[os.path.splitext(os.path.basename(path))[0]
+                for path in glob.glob('src/*.py')],
     setup_requires=[],
     url="https://github.com/dweemx/flatmake",
     version="0.2.0",
