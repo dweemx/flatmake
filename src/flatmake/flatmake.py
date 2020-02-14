@@ -104,7 +104,7 @@ def serialize_rgb_triple_array(np_red, np_green, np_blue, verbose=False):
         )
         buf = bytes(builder.Output())
     except Exception as e:
-        print(e)
+        raise Exception(e)
 
     if verbose is True:
         print(f"Size: {str(sys.getsizeof(buf))} bytes")

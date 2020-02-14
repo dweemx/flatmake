@@ -1,3 +1,5 @@
+from .flatmake import *
+
 """Top-level package for flatmake."""
 
 __author__ = """Maxime De Waegeneer"""
