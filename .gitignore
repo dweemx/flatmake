@@ -106,3 +106,5 @@ ENV/
 .vscode/
 
 .nox
+
+node_modules
