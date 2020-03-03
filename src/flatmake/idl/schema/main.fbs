@@ -1,9 +1,23 @@
-include './ubyte_array.fbs';
-include './float_array.fbs';
-include './coordinates_2d.fbs';
-include './rgb_triple_array.fbs';
-
 namespace Dim;
+
+table UByteArray {
+	data: [ubyte];
+}
+
+table FloatArray {
+	data: [float32];
+}
+
+table Coordinates2D {
+	x: FloatArray;
+	y: FloatArray;
+}
+
+table RGBTripleArray {
+	r: [ubyte];
+	g: [ubyte];
+	b: [ubyte];
+}
 
 table Dim {
     ubyteArray: UByteArray;
