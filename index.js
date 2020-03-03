@@ -6,7 +6,7 @@ function toByteBuffer(bytes) {
     return new flatbuffers.ByteBuffer(data);
 }
 
-function getCoordinates2D(bytes) {
+export function getCoordinates2D(bytes) {
     const e = Dim.Coordinates2D.getRootAsCoordinates2D(
         toByteBuffer(bytes),
         null
@@ -15,8 +15,4 @@ function getCoordinates2D(bytes) {
         x: e.x().dataArray(),
         y: e.y().dataArray()
     }
-}
-
-module.exports = {
-    getCoordinates2D
 }
