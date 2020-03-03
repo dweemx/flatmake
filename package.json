@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/dweemx/flatmake/issues"
   },
-  "homepage": "https://github.com/dweemx/flatmake#readme"
+  "homepage": "https://github.com/dweemx/flatmake#readme",
+  "dependencies": {
+    "flatbuffers": "^1.11.0"
+  }
 }
