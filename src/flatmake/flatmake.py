@@ -4,6 +4,7 @@ import flatbuffers
 from flatmake.idl.python.Dim import UByteArray
 from flatmake.idl.python.Dim import FloatArray
 from flatmake.idl.python.Dim import Coordinates2D
+from flatmake.idl.python.Dim import ColorArray1D
 from flatmake.idl.python.Dim import RGBTripleArray
 
 
@@ -101,6 +102,39 @@ def serialize_rgb_triple_array(np_red, np_green, np_blue, verbose=False):
             np_r=np_red,
             np_g=np_green,
             np_b=np_blue
+        )
+        buf = bytes(builder.Output())
+    except Exception as e:
+        raise Exception(e)
+
+    if verbose is True:
+        print(f"Size: {str(sys.getsizeof(buf))} bytes")
+
+    return buf
+
+
+def build_color_array(np_arr):
+    try:
+        builder = flatbuffers.Builder(0)
+        fb_arr = add_ubyte_array(
+            builder=builder,
+            np_arr=normalize_to_rgb(
+                np_arr=np_arr
+            )
+        )
+        ColorArray1D.ColorArray1DStart(builder)
+        ColorArray1D.ColorArray1DAddColor(builder=builder, color=fb_arr)
+        color_array_1d = ColorArray1D.ColorArray1DEnd(builder)
+        builder.Finish(color_array_1d)
+        return builder
+    except Exception as e:
+        raise Exception(e)
+
+
+def serialize_color_array(np_arr, verbose=False):
+    try:
+        builder = build_color_array(
+            np_arr=np_arr
         )
         buf = bytes(builder.Output())
     except Exception as e:

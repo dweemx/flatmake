@@ -14,16 +14,21 @@ table Coordinates2D {
 }
 
 table RGBTripleArray {
-	r: [ubyte];
-	g: [ubyte];
-	b: [ubyte];
+	r: UByteArray;
+	g: UByteArray;
+	b: UByteArray;
+}
+
+table ColorArray1D {
+	color: UByteArray;
 }
 
 table Dim {
     ubyteArray: UByteArray;
     floatArray: FloatArray;
-    rgbTripleArray: RGBTripleArray;
     coordinates2D: Coordinates2D;
+	colorArray1D: ColorArray1D;
+	rgbTripleArray: RGBTripleArray;
 }
 
 root_type Dim;

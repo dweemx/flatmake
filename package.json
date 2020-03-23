@@ -1,6 +1,6 @@
 {
   "name": "flatmake",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "A variety of utilities to build high-level flatbuffers structures",
   "main": "index.js",
   "directories": {

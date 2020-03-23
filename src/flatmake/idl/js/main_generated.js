@@ -337,78 +337,30 @@ Dim.RGBTripleArray.getRootAsRGBTripleArray = function(bb, obj) {
 };
 
 /**
- * @param {number} index
- * @returns {number}
+ * @param {Dim.UByteArray=} obj
+ * @returns {Dim.UByteArray|null}
  */
-Dim.RGBTripleArray.prototype.r = function(index) {
+Dim.RGBTripleArray.prototype.r = function(obj) {
   var offset = this.bb.__offset(this.bb_pos, 4);
-  return offset ? this.bb.readUint8(this.bb.__vector(this.bb_pos + offset) + index) : 0;
+  return offset ? (obj || new Dim.UByteArray).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
 };
 
 /**
- * @returns {number}
+ * @param {Dim.UByteArray=} obj
+ * @returns {Dim.UByteArray|null}
  */
-Dim.RGBTripleArray.prototype.rLength = function() {
-  var offset = this.bb.__offset(this.bb_pos, 4);
-  return offset ? this.bb.__vector_len(this.bb_pos + offset) : 0;
-};
-
-/**
- * @returns {Uint8Array}
- */
-Dim.RGBTripleArray.prototype.rArray = function() {
-  var offset = this.bb.__offset(this.bb_pos, 4);
-  return offset ? new Uint8Array(this.bb.bytes().buffer, this.bb.bytes().byteOffset + this.bb.__vector(this.bb_pos + offset), this.bb.__vector_len(this.bb_pos + offset)) : null;
-};
-
-/**
- * @param {number} index
- * @returns {number}
- */
-Dim.RGBTripleArray.prototype.g = function(index) {
+Dim.RGBTripleArray.prototype.g = function(obj) {
   var offset = this.bb.__offset(this.bb_pos, 6);
-  return offset ? this.bb.readUint8(this.bb.__vector(this.bb_pos + offset) + index) : 0;
+  return offset ? (obj || new Dim.UByteArray).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
 };
 
 /**
- * @returns {number}
+ * @param {Dim.UByteArray=} obj
+ * @returns {Dim.UByteArray|null}
  */
-Dim.RGBTripleArray.prototype.gLength = function() {
-  var offset = this.bb.__offset(this.bb_pos, 6);
-  return offset ? this.bb.__vector_len(this.bb_pos + offset) : 0;
-};
-
-/**
- * @returns {Uint8Array}
- */
-Dim.RGBTripleArray.prototype.gArray = function() {
-  var offset = this.bb.__offset(this.bb_pos, 6);
-  return offset ? new Uint8Array(this.bb.bytes().buffer, this.bb.bytes().byteOffset + this.bb.__vector(this.bb_pos + offset), this.bb.__vector_len(this.bb_pos + offset)) : null;
-};
-
-/**
- * @param {number} index
- * @returns {number}
- */
-Dim.RGBTripleArray.prototype.b = function(index) {
+Dim.RGBTripleArray.prototype.b = function(obj) {
   var offset = this.bb.__offset(this.bb_pos, 8);
-  return offset ? this.bb.readUint8(this.bb.__vector(this.bb_pos + offset) + index) : 0;
-};
-
-/**
- * @returns {number}
- */
-Dim.RGBTripleArray.prototype.bLength = function() {
-  var offset = this.bb.__offset(this.bb_pos, 8);
-  return offset ? this.bb.__vector_len(this.bb_pos + offset) : 0;
-};
-
-/**
- * @returns {Uint8Array}
- */
-Dim.RGBTripleArray.prototype.bArray = function() {
-  var offset = this.bb.__offset(this.bb_pos, 8);
-  return offset ? new Uint8Array(this.bb.bytes().buffer, this.bb.bytes().byteOffset + this.bb.__vector(this.bb_pos + offset), this.bb.__vector_len(this.bb_pos + offset)) : null;
+  return offset ? (obj || new Dim.UByteArray).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
 };
 
 /**
@@ -428,52 +380,10 @@ Dim.RGBTripleArray.addR = function(builder, rOffset) {
 
 /**
  * @param {flatbuffers.Builder} builder
- * @param {Array.<number>} data
- * @returns {flatbuffers.Offset}
- */
-Dim.RGBTripleArray.createRVector = function(builder, data) {
-  builder.startVector(1, data.length, 1);
-  for (var i = data.length - 1; i >= 0; i--) {
-    builder.addInt8(data[i]);
-  }
-  return builder.endVector();
-};
-
-/**
- * @param {flatbuffers.Builder} builder
- * @param {number} numElems
- */
-Dim.RGBTripleArray.startRVector = function(builder, numElems) {
-  builder.startVector(1, numElems, 1);
-};
-
-/**
- * @param {flatbuffers.Builder} builder
  * @param {flatbuffers.Offset} gOffset
  */
 Dim.RGBTripleArray.addG = function(builder, gOffset) {
   builder.addFieldOffset(1, gOffset, 0);
-};
-
-/**
- * @param {flatbuffers.Builder} builder
- * @param {Array.<number>} data
- * @returns {flatbuffers.Offset}
- */
-Dim.RGBTripleArray.createGVector = function(builder, data) {
-  builder.startVector(1, data.length, 1);
-  for (var i = data.length - 1; i >= 0; i--) {
-    builder.addInt8(data[i]);
-  }
-  return builder.endVector();
-};
-
-/**
- * @param {flatbuffers.Builder} builder
- * @param {number} numElems
- */
-Dim.RGBTripleArray.startGVector = function(builder, numElems) {
-  builder.startVector(1, numElems, 1);
 };
 
 /**
@@ -486,30 +396,77 @@ Dim.RGBTripleArray.addB = function(builder, bOffset) {
 
 /**
  * @param {flatbuffers.Builder} builder
- * @param {Array.<number>} data
- * @returns {flatbuffers.Offset}
- */
-Dim.RGBTripleArray.createBVector = function(builder, data) {
-  builder.startVector(1, data.length, 1);
-  for (var i = data.length - 1; i >= 0; i--) {
-    builder.addInt8(data[i]);
-  }
-  return builder.endVector();
-};
-
-/**
- * @param {flatbuffers.Builder} builder
- * @param {number} numElems
- */
-Dim.RGBTripleArray.startBVector = function(builder, numElems) {
-  builder.startVector(1, numElems, 1);
-};
-
-/**
- * @param {flatbuffers.Builder} builder
  * @returns {flatbuffers.Offset}
  */
 Dim.RGBTripleArray.endRGBTripleArray = function(builder) {
+  var offset = builder.endObject();
+  return offset;
+};
+
+/**
+ * @constructor
+ */
+Dim.ColorArray1D = function() {
+  /**
+   * @type {flatbuffers.ByteBuffer}
+   */
+  this.bb = null;
+
+  /**
+   * @type {number}
+   */
+  this.bb_pos = 0;
+};
+
+/**
+ * @param {number} i
+ * @param {flatbuffers.ByteBuffer} bb
+ * @returns {Dim.ColorArray1D}
+ */
+Dim.ColorArray1D.prototype.__init = function(i, bb) {
+  this.bb_pos = i;
+  this.bb = bb;
+  return this;
+};
+
+/**
+ * @param {flatbuffers.ByteBuffer} bb
+ * @param {Dim.ColorArray1D=} obj
+ * @returns {Dim.ColorArray1D}
+ */
+Dim.ColorArray1D.getRootAsColorArray1D = function(bb, obj) {
+  return (obj || new Dim.ColorArray1D).__init(bb.readInt32(bb.position()) + bb.position(), bb);
+};
+
+/**
+ * @param {Dim.UByteArray=} obj
+ * @returns {Dim.UByteArray|null}
+ */
+Dim.ColorArray1D.prototype.color = function(obj) {
+  var offset = this.bb.__offset(this.bb_pos, 4);
+  return offset ? (obj || new Dim.UByteArray).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
+};
+
+/**
+ * @param {flatbuffers.Builder} builder
+ */
+Dim.ColorArray1D.startColorArray1D = function(builder) {
+  builder.startObject(1);
+};
+
+/**
+ * @param {flatbuffers.Builder} builder
+ * @param {flatbuffers.Offset} colorOffset
+ */
+Dim.ColorArray1D.addColor = function(builder, colorOffset) {
+  builder.addFieldOffset(0, colorOffset, 0);
+};
+
+/**
+ * @param {flatbuffers.Builder} builder
+ * @returns {flatbuffers.Offset}
+ */
+Dim.ColorArray1D.endColorArray1D = function(builder) {
   var offset = builder.endObject();
   return offset;
 };
@@ -568,28 +525,37 @@ Dim.Dim.prototype.floatArray = function(obj) {
 };
 
 /**
- * @param {Dim.RGBTripleArray=} obj
- * @returns {Dim.RGBTripleArray|null}
- */
-Dim.Dim.prototype.rgbTripleArray = function(obj) {
-  var offset = this.bb.__offset(this.bb_pos, 8);
-  return offset ? (obj || new Dim.RGBTripleArray).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
-};
-
-/**
  * @param {Dim.Coordinates2D=} obj
  * @returns {Dim.Coordinates2D|null}
  */
 Dim.Dim.prototype.coordinates2D = function(obj) {
-  var offset = this.bb.__offset(this.bb_pos, 10);
+  var offset = this.bb.__offset(this.bb_pos, 8);
   return offset ? (obj || new Dim.Coordinates2D).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
+};
+
+/**
+ * @param {Dim.ColorArray1D=} obj
+ * @returns {Dim.ColorArray1D|null}
+ */
+Dim.Dim.prototype.colorArray1D = function(obj) {
+  var offset = this.bb.__offset(this.bb_pos, 10);
+  return offset ? (obj || new Dim.ColorArray1D).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
+};
+
+/**
+ * @param {Dim.RGBTripleArray=} obj
+ * @returns {Dim.RGBTripleArray|null}
+ */
+Dim.Dim.prototype.rgbTripleArray = function(obj) {
+  var offset = this.bb.__offset(this.bb_pos, 12);
+  return offset ? (obj || new Dim.RGBTripleArray).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
 };
 
 /**
  * @param {flatbuffers.Builder} builder
  */
 Dim.Dim.startDim = function(builder) {
-  builder.startObject(4);
+  builder.startObject(5);
 };
 
 /**
@@ -610,18 +576,26 @@ Dim.Dim.addFloatArray = function(builder, floatArrayOffset) {
 
 /**
  * @param {flatbuffers.Builder} builder
- * @param {flatbuffers.Offset} rgbTripleArrayOffset
+ * @param {flatbuffers.Offset} coordinates2DOffset
  */
-Dim.Dim.addRgbTripleArray = function(builder, rgbTripleArrayOffset) {
-  builder.addFieldOffset(2, rgbTripleArrayOffset, 0);
+Dim.Dim.addCoordinates2D = function(builder, coordinates2DOffset) {
+  builder.addFieldOffset(2, coordinates2DOffset, 0);
 };
 
 /**
  * @param {flatbuffers.Builder} builder
- * @param {flatbuffers.Offset} coordinates2DOffset
+ * @param {flatbuffers.Offset} colorArray1DOffset
  */
-Dim.Dim.addCoordinates2D = function(builder, coordinates2DOffset) {
-  builder.addFieldOffset(3, coordinates2DOffset, 0);
+Dim.Dim.addColorArray1D = function(builder, colorArray1DOffset) {
+  builder.addFieldOffset(3, colorArray1DOffset, 0);
+};
+
+/**
+ * @param {flatbuffers.Builder} builder
+ * @param {flatbuffers.Offset} rgbTripleArrayOffset
+ */
+Dim.Dim.addRgbTripleArray = function(builder, rgbTripleArrayOffset) {
+  builder.addFieldOffset(4, rgbTripleArrayOffset, 0);
 };
 
 /**

@@ -9,6 +9,7 @@ A variety of utilities to build high-level flatbuffers structures
 
 ## Data Types
 - FloatArray
+- ColorArray1D
 - RGBTripleArray
 - Coordinates2D
 

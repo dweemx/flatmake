@@ -16,3 +16,13 @@ export function getCoordinates2D(bytes) {
         y: e.y().dataArray()
     }
 }
+
+export function getColorArray1D(bytes) {
+    const e = Dim.ColorArray1D.getRootAsColorArray1D(
+        toByteBuffer(bytes),
+        null
+    );
+    return {
+        color: e.color().dataArray(),
+    }
+}
