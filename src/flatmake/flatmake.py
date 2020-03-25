@@ -61,7 +61,7 @@ def normalize_to_rgb(np_arr):
         np_arr,
         (np_arr.min(), np_arr.max()),
         (0, 255)
-    ).astype(int)
+    ).astype(np.uint8)
 
 
 def build_rgb_triple_array(np_r, np_g, np_b):
