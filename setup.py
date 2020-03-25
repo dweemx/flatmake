@@ -21,7 +21,7 @@ setup(
     description="A variety of utilities to build high-level flatbuffers structures",
     entry_points={"console_scripts": ["flatmake=flatmake.cli:main", ], },
     install_requires=[
-        'numpy==1.18.1',
+        'numpy==1.15.4',
         'flatbuffers==1.12'
     ],
     license="MIT license",
