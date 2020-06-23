@@ -40,6 +40,31 @@ def build_coordinates_2d(np_x, np_y):
     return builder
 
 
+def build_float_array(np_arr):
+    builder = flatbuffers.Builder(0)
+    arr = builder.CreateNumpyVector(np_arr)
+    FloatArray.FloatArrayStart(builder)
+    FloatArray.FloatArrayAddData(builder=builder, data=arr)
+    float_array = FloatArray.FloatArrayEnd(builder)
+    builder.Finish(float_array)
+    return builder
+
+
+def serialize_float_array(np_arr, verbose=False):
+    try:
+        builder = build_float_array(
+            np_arr=np_arr
+        )
+        buf = bytes(builder.Output())
+    except Exception as e:
+        raise Exception(e)
+
+    if verbose is True:
+        print(f"Size: {str(sys.getsizeof(buf))} bytes")
+
+    return buf
+
+
 def serialize_coordinates_2d(np_x, np_y, verbose=False):
     try:
         builder = build_coordinates_2d(
