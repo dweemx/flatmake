@@ -37,6 +37,6 @@ setup(
                 for path in glob.glob('src/*.py')],
     setup_requires=[],
     url="https://github.com/dweemx/flatmake",
-    version="0.7.1",
+    version="0.8.0",
     zip_safe=False,
 )
