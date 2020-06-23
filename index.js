@@ -26,3 +26,14 @@ export function getColorArray1D(bytes) {
         color: e.color().dataArray(),
     }
 }
+
+export function getFloatArray(bytes) {
+    const e = Dim.FloatArray.getRootAsFloatArray(
+        toByteBuffer(bytes),
+        null
+    );
+    return {
+        values: e.dataArray(),
+    }
+}
+
