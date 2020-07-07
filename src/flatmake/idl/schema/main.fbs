@@ -4,13 +4,13 @@ table UByteArray {
 	data: [ubyte];
 }
 
-table FloatArray {
-	data: [float32];
+table Float32Array {
+	data: [float];
 }
 
 table Coordinates2D {
-	x: FloatArray;
-	y: FloatArray;
+	x: Float32Array;
+	y: Float32Array;
 }
 
 table RGBTripleArray {
@@ -25,7 +25,7 @@ table ColorArray1D {
 
 table Dim {
     ubyteArray: UByteArray;
-    floatArray: FloatArray;
+    float32Array: Float32Array;
     coordinates2D: Coordinates2D;
 	colorArray1D: ColorArray1D;
 	rgbTripleArray: RGBTripleArray;

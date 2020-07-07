@@ -27,8 +27,8 @@ export function getColorArray1D(bytes) {
     }
 }
 
-export function getFloatArray(bytes) {
-    const e = Dim.FloatArray.getRootAsFloatArray(
+export function getFloat32Array(bytes) {
+    const e = Dim.FloatArray.getRootAsFloat32Array(
         toByteBuffer(bytes),
         null
     );

@@ -114,7 +114,7 @@ Dim.UByteArray.endUByteArray = function(builder) {
 /**
  * @constructor
  */
-Dim.FloatArray = function() {
+Dim.Float32Array = function() {
   /**
    * @type {flatbuffers.ByteBuffer}
    */
@@ -129,9 +129,9 @@ Dim.FloatArray = function() {
 /**
  * @param {number} i
  * @param {flatbuffers.ByteBuffer} bb
- * @returns {Dim.FloatArray}
+ * @returns {Dim.Float32Array}
  */
-Dim.FloatArray.prototype.__init = function(i, bb) {
+Dim.Float32Array.prototype.__init = function(i, bb) {
   this.bb_pos = i;
   this.bb = bb;
   return this;
@@ -139,18 +139,18 @@ Dim.FloatArray.prototype.__init = function(i, bb) {
 
 /**
  * @param {flatbuffers.ByteBuffer} bb
- * @param {Dim.FloatArray=} obj
- * @returns {Dim.FloatArray}
+ * @param {Dim.Float32Array=} obj
+ * @returns {Dim.Float32Array}
  */
-Dim.FloatArray.getRootAsFloatArray = function(bb, obj) {
-  return (obj || new Dim.FloatArray).__init(bb.readInt32(bb.position()) + bb.position(), bb);
+Dim.Float32Array.getRootAsFloat32Array = function(bb, obj) {
+  return (obj || new Dim.Float32Array).__init(bb.readInt32(bb.position()) + bb.position(), bb);
 };
 
 /**
  * @param {number} index
  * @returns {number}
  */
-Dim.FloatArray.prototype.data = function(index) {
+Dim.Float32Array.prototype.data = function(index) {
   var offset = this.bb.__offset(this.bb_pos, 4);
   return offset ? this.bb.readFloat32(this.bb.__vector(this.bb_pos + offset) + index * 4) : 0;
 };
@@ -158,7 +158,7 @@ Dim.FloatArray.prototype.data = function(index) {
 /**
  * @returns {number}
  */
-Dim.FloatArray.prototype.dataLength = function() {
+Dim.Float32Array.prototype.dataLength = function() {
   var offset = this.bb.__offset(this.bb_pos, 4);
   return offset ? this.bb.__vector_len(this.bb_pos + offset) : 0;
 };
@@ -166,7 +166,7 @@ Dim.FloatArray.prototype.dataLength = function() {
 /**
  * @returns {Float32Array}
  */
-Dim.FloatArray.prototype.dataArray = function() {
+Dim.Float32Array.prototype.dataArray = function() {
   var offset = this.bb.__offset(this.bb_pos, 4);
   return offset ? new Float32Array(this.bb.bytes().buffer, this.bb.bytes().byteOffset + this.bb.__vector(this.bb_pos + offset), this.bb.__vector_len(this.bb_pos + offset)) : null;
 };
@@ -174,7 +174,7 @@ Dim.FloatArray.prototype.dataArray = function() {
 /**
  * @param {flatbuffers.Builder} builder
  */
-Dim.FloatArray.startFloatArray = function(builder) {
+Dim.Float32Array.startFloat32Array = function(builder) {
   builder.startObject(1);
 };
 
@@ -182,7 +182,7 @@ Dim.FloatArray.startFloatArray = function(builder) {
  * @param {flatbuffers.Builder} builder
  * @param {flatbuffers.Offset} dataOffset
  */
-Dim.FloatArray.addData = function(builder, dataOffset) {
+Dim.Float32Array.addData = function(builder, dataOffset) {
   builder.addFieldOffset(0, dataOffset, 0);
 };
 
@@ -191,7 +191,7 @@ Dim.FloatArray.addData = function(builder, dataOffset) {
  * @param {Array.<number>} data
  * @returns {flatbuffers.Offset}
  */
-Dim.FloatArray.createDataVector = function(builder, data) {
+Dim.Float32Array.createDataVector = function(builder, data) {
   builder.startVector(4, data.length, 4);
   for (var i = data.length - 1; i >= 0; i--) {
     builder.addFloat32(data[i]);
@@ -203,7 +203,7 @@ Dim.FloatArray.createDataVector = function(builder, data) {
  * @param {flatbuffers.Builder} builder
  * @param {number} numElems
  */
-Dim.FloatArray.startDataVector = function(builder, numElems) {
+Dim.Float32Array.startDataVector = function(builder, numElems) {
   builder.startVector(4, numElems, 4);
 };
 
@@ -211,7 +211,7 @@ Dim.FloatArray.startDataVector = function(builder, numElems) {
  * @param {flatbuffers.Builder} builder
  * @returns {flatbuffers.Offset}
  */
-Dim.FloatArray.endFloatArray = function(builder) {
+Dim.Float32Array.endFloat32Array = function(builder) {
   var offset = builder.endObject();
   return offset;
 };
@@ -252,21 +252,21 @@ Dim.Coordinates2D.getRootAsCoordinates2D = function(bb, obj) {
 };
 
 /**
- * @param {Dim.FloatArray=} obj
- * @returns {Dim.FloatArray|null}
+ * @param {Dim.Float32Array=} obj
+ * @returns {Dim.Float32Array|null}
  */
 Dim.Coordinates2D.prototype.x = function(obj) {
   var offset = this.bb.__offset(this.bb_pos, 4);
-  return offset ? (obj || new Dim.FloatArray).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
+  return offset ? (obj || new Dim.Float32Array).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
 };
 
 /**
- * @param {Dim.FloatArray=} obj
- * @returns {Dim.FloatArray|null}
+ * @param {Dim.Float32Array=} obj
+ * @returns {Dim.Float32Array|null}
  */
 Dim.Coordinates2D.prototype.y = function(obj) {
   var offset = this.bb.__offset(this.bb_pos, 6);
-  return offset ? (obj || new Dim.FloatArray).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
+  return offset ? (obj || new Dim.Float32Array).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
 };
 
 /**
@@ -516,12 +516,12 @@ Dim.Dim.prototype.ubyteArray = function(obj) {
 };
 
 /**
- * @param {Dim.FloatArray=} obj
- * @returns {Dim.FloatArray|null}
+ * @param {Dim.Float32Array=} obj
+ * @returns {Dim.Float32Array|null}
  */
-Dim.Dim.prototype.floatArray = function(obj) {
+Dim.Dim.prototype.float32Array = function(obj) {
   var offset = this.bb.__offset(this.bb_pos, 6);
-  return offset ? (obj || new Dim.FloatArray).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
+  return offset ? (obj || new Dim.Float32Array).__init(this.bb.__indirect(this.bb_pos + offset), this.bb) : null;
 };
 
 /**
@@ -568,10 +568,10 @@ Dim.Dim.addUbyteArray = function(builder, ubyteArrayOffset) {
 
 /**
  * @param {flatbuffers.Builder} builder
- * @param {flatbuffers.Offset} floatArrayOffset
+ * @param {flatbuffers.Offset} float32ArrayOffset
  */
-Dim.Dim.addFloatArray = function(builder, floatArrayOffset) {
-  builder.addFieldOffset(1, floatArrayOffset, 0);
+Dim.Dim.addFloat32Array = function(builder, float32ArrayOffset) {
+  builder.addFieldOffset(1, float32ArrayOffset, 0);
 };
 
 /**

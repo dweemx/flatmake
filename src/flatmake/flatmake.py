@@ -2,7 +2,7 @@ import sys
 import numpy as np
 import flatbuffers
 from flatmake.idl.python.Dim import UByteArray
-from flatmake.idl.python.Dim import FloatArray
+from flatmake.idl.python.Dim import Float32Array
 from flatmake.idl.python.Dim import Coordinates2D
 from flatmake.idl.python.Dim import ColorArray1D
 from flatmake.idl.python.Dim import RGBTripleArray
@@ -17,9 +17,9 @@ def add_ubyte_array(builder, np_arr):
 
 def add_float_array(builder, np_arr):
     arr = builder.CreateNumpyVector(np_arr)
-    FloatArray.FloatArrayStart(builder)
-    FloatArray.FloatArrayAddData(builder=builder, data=arr)
-    return FloatArray.FloatArrayEnd(builder)
+    Float32Array.Float32ArrayStart(builder)
+    Float32Array.Float32ArrayAddData(builder=builder, data=arr)
+    return Float32Array.Float32ArrayEnd(builder)
 
 
 def build_coordinates_2d(np_x, np_y):
@@ -40,19 +40,19 @@ def build_coordinates_2d(np_x, np_y):
     return builder
 
 
-def build_float_array(np_arr):
+def build_float32_array(np_arr):
     builder = flatbuffers.Builder(0)
     arr = builder.CreateNumpyVector(np_arr)
-    FloatArray.FloatArrayStart(builder)
-    FloatArray.FloatArrayAddData(builder=builder, data=arr)
-    float_array = FloatArray.FloatArrayEnd(builder)
+    Float32Array.Float32ArrayStart(builder)
+    Float32Array.Float32ArrayAddData(builder=builder, data=arr)
+    float_array = Float32Array.Float32ArrayEnd(builder)
     builder.Finish(float_array)
     return builder
 
 
-def serialize_float_array(np_arr, verbose=False):
+def serialize_float32_array(np_arr, verbose=False):
     try:
-        builder = build_float_array(
+        builder = build_float32_array(
             np_arr=np_arr
         )
         buf = bytes(builder.Output())
