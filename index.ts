@@ -6,6 +6,65 @@ function toByteBuffer(bytes: ArrayBufferLike) {
     return new flatbuffers.ByteBuffer(data);
 }
 
+export function getFloat32Array(bytes: ArrayBufferLike) {
+    const e = Dim.Float32Array.getRootAsFloat32Array(
+        toByteBuffer(bytes)
+    );
+    return {
+        values: e.dataArray(),
+    }
+}
+
+type LabeledIndexSet = {
+    name: string;
+    indices: Uint32Array
+}
+
+export function getLabeledIndexSetByNameFromSuperSet(bytes: ArrayBufferLike, name: string): LabeledIndexSet {
+    const e = Dim.LabeledIndexSuperSet.getRootAsLabeledIndexSuperSet(
+        toByteBuffer(bytes)
+    );
+    const superSetName = e.name()
+    const setIndex = [...new Array(e.setsLength()).keys()].filter(index => {
+        return e.sets(index).name() === name;
+    })
+    if(setIndex.length !== 1)
+        return null
+    const set = e.sets(setIndex[0])
+    return {
+        name: set[0].name(),
+        indices: set[0].indices()
+    }
+
+}
+
+type LabeledIndexSuperSet = {
+    name: string;
+    sets: {
+        name: string;
+        indices: Uint32Array
+    }[]
+}
+
+export function getLabeledIndexSuperSet(bytes: ArrayBufferLike): LabeledIndexSuperSet {
+    const e = Dim.LabeledIndexSuperSet.getRootAsLabeledIndexSuperSet(
+        toByteBuffer(bytes)
+    );
+    const name = e.name()
+    const sets = [...new Array(e.setsLength()).keys()].map(index => {
+        const set = e.sets(index);
+        return {
+            name: set.name(),
+            indices: set.indices().dataArray()
+        }
+    })
+    return {
+        name: name,
+        sets: sets
+    }
+
+}
+
 export function getCoordinates2D(bytes: ArrayBufferLike) {
     const e = Dim.Coordinates2D.getRootAsCoordinates2D(
         toByteBuffer(bytes)
@@ -22,7 +81,11 @@ export function getCoordinates2D(bytes: ArrayBufferLike) {
         }
 }
 
-export function getColorArray1D(bytes: ArrayBufferLike) {
+type ColorArray1D = {
+    color: Uint8Array | null
+}
+
+export function getColorArray1D(bytes: ArrayBufferLike): ColorArray1D {
     const e = Dim.ColorArray1D.getRootAsColorArray1D(
         toByteBuffer(bytes)
     );
@@ -31,16 +94,7 @@ export function getColorArray1D(bytes: ArrayBufferLike) {
         {
             color: null
         } : {
-        color: color.dataArray(),
+            color: color.dataArray(),
         }
-}
-
-export function getFloat32Array(bytes: ArrayBufferLike) {
-    const e = Dim.Float32Array.getRootAsFloat32Array(
-        toByteBuffer(bytes)
-    );
-    return {
-        values: e.dataArray(),
-    }
 }
 
