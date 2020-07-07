@@ -215,6 +215,317 @@ static createFloat32Array(builder:flatbuffers.Builder, dataOffset:flatbuffers.Of
  * @constructor
  */
 export namespace Dim{
+export class UInt32Array {
+  bb: flatbuffers.ByteBuffer|null = null;
+
+  bb_pos:number = 0;
+/**
+ * @param number i
+ * @param flatbuffers.ByteBuffer bb
+ * @returns UInt32Array
+ */
+__init(i:number, bb:flatbuffers.ByteBuffer):UInt32Array {
+  this.bb_pos = i;
+  this.bb = bb;
+  return this;
+};
+
+/**
+ * @param flatbuffers.ByteBuffer bb
+ * @param UInt32Array= obj
+ * @returns UInt32Array
+ */
+static getRootAsUInt32Array(bb:flatbuffers.ByteBuffer, obj?:UInt32Array):UInt32Array {
+  return (obj || new UInt32Array).__init(bb.readInt32(bb.position()) + bb.position(), bb);
+};
+
+/**
+ * @param number index
+ * @returns number
+ */
+data(index: number):number|null {
+  var offset = this.bb!.__offset(this.bb_pos, 4);
+  return offset ? this.bb!.readUint32(this.bb!.__vector(this.bb_pos + offset) + index * 4) : 0;
+};
+
+/**
+ * @returns number
+ */
+dataLength():number {
+  var offset = this.bb!.__offset(this.bb_pos, 4);
+  return offset ? this.bb!.__vector_len(this.bb_pos + offset) : 0;
+};
+
+/**
+ * @returns Uint32Array
+ */
+dataArray():Uint32Array|null {
+  var offset = this.bb!.__offset(this.bb_pos, 4);
+  return offset ? new Uint32Array(this.bb!.bytes().buffer, this.bb!.bytes().byteOffset + this.bb!.__vector(this.bb_pos + offset), this.bb!.__vector_len(this.bb_pos + offset)) : null;
+};
+
+/**
+ * @param flatbuffers.Builder builder
+ */
+static startUInt32Array(builder:flatbuffers.Builder) {
+  builder.startObject(1);
+};
+
+/**
+ * @param flatbuffers.Builder builder
+ * @param flatbuffers.Offset dataOffset
+ */
+static addData(builder:flatbuffers.Builder, dataOffset:flatbuffers.Offset) {
+  builder.addFieldOffset(0, dataOffset, 0);
+};
+
+/**
+ * @param flatbuffers.Builder builder
+ * @param Array.<number> data
+ * @returns flatbuffers.Offset
+ */
+static createDataVector(builder:flatbuffers.Builder, data:number[] | Uint8Array):flatbuffers.Offset {
+  builder.startVector(4, data.length, 4);
+  for (var i = data.length - 1; i >= 0; i--) {
+    builder.addInt32(data[i]);
+  }
+  return builder.endVector();
+};
+
+/**
+ * @param flatbuffers.Builder builder
+ * @param number numElems
+ */
+static startDataVector(builder:flatbuffers.Builder, numElems:number) {
+  builder.startVector(4, numElems, 4);
+};
+
+/**
+ * @param flatbuffers.Builder builder
+ * @returns flatbuffers.Offset
+ */
+static endUInt32Array(builder:flatbuffers.Builder):flatbuffers.Offset {
+  var offset = builder.endObject();
+  return offset;
+};
+
+static createUInt32Array(builder:flatbuffers.Builder, dataOffset:flatbuffers.Offset):flatbuffers.Offset {
+  UInt32Array.startUInt32Array(builder);
+  UInt32Array.addData(builder, dataOffset);
+  return UInt32Array.endUInt32Array(builder);
+}
+}
+}
+/**
+ * @constructor
+ */
+export namespace Dim{
+export class LabeledIndexSet {
+  bb: flatbuffers.ByteBuffer|null = null;
+
+  bb_pos:number = 0;
+/**
+ * @param number i
+ * @param flatbuffers.ByteBuffer bb
+ * @returns LabeledIndexSet
+ */
+__init(i:number, bb:flatbuffers.ByteBuffer):LabeledIndexSet {
+  this.bb_pos = i;
+  this.bb = bb;
+  return this;
+};
+
+/**
+ * @param flatbuffers.ByteBuffer bb
+ * @param LabeledIndexSet= obj
+ * @returns LabeledIndexSet
+ */
+static getRootAsLabeledIndexSet(bb:flatbuffers.ByteBuffer, obj?:LabeledIndexSet):LabeledIndexSet {
+  return (obj || new LabeledIndexSet).__init(bb.readInt32(bb.position()) + bb.position(), bb);
+};
+
+/**
+ * @param flatbuffers.Encoding= optionalEncoding
+ * @returns string|Uint8Array|null
+ */
+name():string|null
+name(optionalEncoding:flatbuffers.Encoding):string|Uint8Array|null
+name(optionalEncoding?:any):string|Uint8Array|null {
+  var offset = this.bb!.__offset(this.bb_pos, 4);
+  return offset ? this.bb!.__string(this.bb_pos + offset, optionalEncoding) : null;
+};
+
+/**
+ * @param Dim.UInt32Array= obj
+ * @returns Dim.UInt32Array|null
+ */
+indices(obj?:Dim.UInt32Array):Dim.UInt32Array|null {
+  var offset = this.bb!.__offset(this.bb_pos, 6);
+  return offset ? (obj || new Dim.UInt32Array).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!) : null;
+};
+
+/**
+ * @param flatbuffers.Builder builder
+ */
+static startLabeledIndexSet(builder:flatbuffers.Builder) {
+  builder.startObject(2);
+};
+
+/**
+ * @param flatbuffers.Builder builder
+ * @param flatbuffers.Offset nameOffset
+ */
+static addName(builder:flatbuffers.Builder, nameOffset:flatbuffers.Offset) {
+  builder.addFieldOffset(0, nameOffset, 0);
+};
+
+/**
+ * @param flatbuffers.Builder builder
+ * @param flatbuffers.Offset indicesOffset
+ */
+static addIndices(builder:flatbuffers.Builder, indicesOffset:flatbuffers.Offset) {
+  builder.addFieldOffset(1, indicesOffset, 0);
+};
+
+/**
+ * @param flatbuffers.Builder builder
+ * @returns flatbuffers.Offset
+ */
+static endLabeledIndexSet(builder:flatbuffers.Builder):flatbuffers.Offset {
+  var offset = builder.endObject();
+  return offset;
+};
+
+static createLabeledIndexSet(builder:flatbuffers.Builder, nameOffset:flatbuffers.Offset, indicesOffset:flatbuffers.Offset):flatbuffers.Offset {
+  LabeledIndexSet.startLabeledIndexSet(builder);
+  LabeledIndexSet.addName(builder, nameOffset);
+  LabeledIndexSet.addIndices(builder, indicesOffset);
+  return LabeledIndexSet.endLabeledIndexSet(builder);
+}
+}
+}
+/**
+ * @constructor
+ */
+export namespace Dim{
+export class LabeledIndexSuperSet {
+  bb: flatbuffers.ByteBuffer|null = null;
+
+  bb_pos:number = 0;
+/**
+ * @param number i
+ * @param flatbuffers.ByteBuffer bb
+ * @returns LabeledIndexSuperSet
+ */
+__init(i:number, bb:flatbuffers.ByteBuffer):LabeledIndexSuperSet {
+  this.bb_pos = i;
+  this.bb = bb;
+  return this;
+};
+
+/**
+ * @param flatbuffers.ByteBuffer bb
+ * @param LabeledIndexSuperSet= obj
+ * @returns LabeledIndexSuperSet
+ */
+static getRootAsLabeledIndexSuperSet(bb:flatbuffers.ByteBuffer, obj?:LabeledIndexSuperSet):LabeledIndexSuperSet {
+  return (obj || new LabeledIndexSuperSet).__init(bb.readInt32(bb.position()) + bb.position(), bb);
+};
+
+/**
+ * @param flatbuffers.Encoding= optionalEncoding
+ * @returns string|Uint8Array|null
+ */
+name():string|null
+name(optionalEncoding:flatbuffers.Encoding):string|Uint8Array|null
+name(optionalEncoding?:any):string|Uint8Array|null {
+  var offset = this.bb!.__offset(this.bb_pos, 4);
+  return offset ? this.bb!.__string(this.bb_pos + offset, optionalEncoding) : null;
+};
+
+/**
+ * @param number index
+ * @param Dim.LabeledIndexSet= obj
+ * @returns Dim.LabeledIndexSet
+ */
+sets(index: number, obj?:Dim.LabeledIndexSet):Dim.LabeledIndexSet|null {
+  var offset = this.bb!.__offset(this.bb_pos, 6);
+  return offset ? (obj || new Dim.LabeledIndexSet).__init(this.bb!.__indirect(this.bb!.__vector(this.bb_pos + offset) + index * 4), this.bb!) : null;
+};
+
+/**
+ * @returns number
+ */
+setsLength():number {
+  var offset = this.bb!.__offset(this.bb_pos, 6);
+  return offset ? this.bb!.__vector_len(this.bb_pos + offset) : 0;
+};
+
+/**
+ * @param flatbuffers.Builder builder
+ */
+static startLabeledIndexSuperSet(builder:flatbuffers.Builder) {
+  builder.startObject(2);
+};
+
+/**
+ * @param flatbuffers.Builder builder
+ * @param flatbuffers.Offset nameOffset
+ */
+static addName(builder:flatbuffers.Builder, nameOffset:flatbuffers.Offset) {
+  builder.addFieldOffset(0, nameOffset, 0);
+};
+
+/**
+ * @param flatbuffers.Builder builder
+ * @param flatbuffers.Offset setsOffset
+ */
+static addSets(builder:flatbuffers.Builder, setsOffset:flatbuffers.Offset) {
+  builder.addFieldOffset(1, setsOffset, 0);
+};
+
+/**
+ * @param flatbuffers.Builder builder
+ * @param Array.<flatbuffers.Offset> data
+ * @returns flatbuffers.Offset
+ */
+static createSetsVector(builder:flatbuffers.Builder, data:flatbuffers.Offset[]):flatbuffers.Offset {
+  builder.startVector(4, data.length, 4);
+  for (var i = data.length - 1; i >= 0; i--) {
+    builder.addOffset(data[i]);
+  }
+  return builder.endVector();
+};
+
+/**
+ * @param flatbuffers.Builder builder
+ * @param number numElems
+ */
+static startSetsVector(builder:flatbuffers.Builder, numElems:number) {
+  builder.startVector(4, numElems, 4);
+};
+
+/**
+ * @param flatbuffers.Builder builder
+ * @returns flatbuffers.Offset
+ */
+static endLabeledIndexSuperSet(builder:flatbuffers.Builder):flatbuffers.Offset {
+  var offset = builder.endObject();
+  return offset;
+};
+
+static createLabeledIndexSuperSet(builder:flatbuffers.Builder, nameOffset:flatbuffers.Offset, setsOffset:flatbuffers.Offset):flatbuffers.Offset {
+  LabeledIndexSuperSet.startLabeledIndexSuperSet(builder);
+  LabeledIndexSuperSet.addName(builder, nameOffset);
+  LabeledIndexSuperSet.addSets(builder, setsOffset);
+  return LabeledIndexSuperSet.endLabeledIndexSuperSet(builder);
+}
+}
+}
+/**
+ * @constructor
+ */
+export namespace Dim{
 export class Coordinates2D {
   bb: flatbuffers.ByteBuffer|null = null;
 
