@@ -1,43 +1,36 @@
 import sys
 import numpy as np
+import pandas as pd
 import flatbuffers
 from flatmake.idl.python.Dim import UByteArray
 from flatmake.idl.python.Dim import Float32Array
+from flatmake.idl.python.Dim import UInt32Array
+from flatmake.idl.python.Dim import LabeledIndexSet
+from flatmake.idl.python.Dim import LabeledIndexSuperSet
 from flatmake.idl.python.Dim import Coordinates2D
 from flatmake.idl.python.Dim import ColorArray1D
 from flatmake.idl.python.Dim import RGBTripleArray
 
 
 def add_ubyte_array(builder, np_arr):
-    arr = builder.CreateNumpyVector(np_arr)
+    arr = builder.CreateNumpyVector(x=np_arr)
     UByteArray.UByteArrayStart(builder)
     UByteArray.UByteArrayAddData(builder=builder, data=arr)
     return UByteArray.UByteArrayEnd(builder)
 
 
-def add_float_array(builder, np_arr):
-    arr = builder.CreateNumpyVector(np_arr)
+def add_float32_array(builder, np_arr):
+    arr = builder.CreateNumpyVector(x=np_arr)
     Float32Array.Float32ArrayStart(builder)
     Float32Array.Float32ArrayAddData(builder=builder, data=arr)
     return Float32Array.Float32ArrayEnd(builder)
 
 
-def build_coordinates_2d(np_x, np_y):
-    builder = flatbuffers.Builder(0)
-    fb_x = add_float_array(
-        builder=builder,
-        np_arr=np_x
-    )
-    fb_y = add_float_array(
-        builder=builder,
-        np_arr=np_y
-    )
-    Coordinates2D.Coordinates2DStart(builder)
-    Coordinates2D.Coordinates2DAddX(builder=builder, x=fb_x)
-    Coordinates2D.Coordinates2DAddY(builder=builder, y=fb_y)
-    coordinates_2d = Coordinates2D.Coordinates2DEnd(builder)
-    builder.Finish(coordinates_2d)
-    return builder
+def add_uint32_array(builder, np_arr):
+    arr = builder.CreateNumpyVector(x=np_arr)
+    UInt32Array.UInt32ArrayStart(builder)
+    UInt32Array.UInt32ArrayAddData(builder=builder, data=arr)
+    return UInt32Array.UInt32ArrayEnd(builder)
 
 
 def build_float32_array(np_arr):
@@ -45,8 +38,8 @@ def build_float32_array(np_arr):
     arr = builder.CreateNumpyVector(np_arr)
     Float32Array.Float32ArrayStart(builder)
     Float32Array.Float32ArrayAddData(builder=builder, data=arr)
-    float_array = Float32Array.Float32ArrayEnd(builder)
-    builder.Finish(float_array)
+    float32_array = Float32Array.Float32ArrayEnd(builder)
+    builder.Finish(float32_array)
     return builder
 
 
@@ -63,6 +56,107 @@ def serialize_float32_array(np_arr, verbose=False):
         print(f"Size: {str(sys.getsizeof(buf))} bytes")
 
     return buf
+
+
+def add_labeled_index_set(builder, name, np_arr):
+    fb_index_set_name = builder.CreateString(name)
+    fb_uint32_arr = add_uint32_array(
+        builder=builder,
+        np_arr=np_arr
+    )
+    LabeledIndexSet.LabeledIndexSetStart(builder=builder)
+    LabeledIndexSet.LabeledIndexSetAddName(builder=builder, name=fb_index_set_name)
+    LabeledIndexSet.LabeledIndexSetAddIndices(builder=builder, indices=fb_uint32_arr)
+    return LabeledIndexSet.LabeledIndexSetEnd(builder=builder)
+
+
+def build_labeled_index_set(name, np_arr):
+    builder = flatbuffers.Builder(0)
+    fb_labeled_index_set = add_labeled_index_set(
+        builder=builder,
+        name=name,
+        np_arr=np_arr
+    )
+    builder.Finish(fb_labeled_index_set)
+    return builder
+
+
+def serialize_labeled_index_set(name, np_arr, verbose=False):
+    try:
+        builder = build_labeled_index_set(
+            name=name,
+            np_arr=np_arr
+        )
+        buf = bytes(builder.Output())
+    except Exception as e:
+        raise Exception(e)
+
+    if verbose is True:
+        print(f"Size: {str(sys.getsizeof(buf))} bytes")
+
+    return buf
+
+
+def build_labeled_index_super_set(name, np_arr, verbose=False):
+    # Source: https://google.github.io/flatbuffers/md__java_usage.html
+    # Everything else (other tables, strings, vectors) MUST be created before the start of the table they are referenced in.
+    builder = flatbuffers.Builder(0)
+    fb_super_set_name = builder.CreateString(name)
+    df = pd.DataFrame({"set": np_arr})
+    groups = df.groupby("set")
+    num_groups = len(groups)
+    fb_labeled_index_sets = []    
+    for group_name, group in groups:
+        fb_labeled_index_set = add_labeled_index_set(
+            builder=builder,
+            name=group_name,
+            np_arr=group.index.values
+        )
+        fb_labeled_index_sets.append(fb_labeled_index_set)
+    LabeledIndexSuperSet.LabeledIndexSuperSetStartSetsVector(builder=builder, numElems=num_groups)
+    for i in range(num_groups):
+        builder.PrependUOffsetTRelative(fb_labeled_index_sets[i])
+    fb_sets = builder.EndVector(num_groups)
+    LabeledIndexSuperSet.LabeledIndexSuperSetStart(builder=builder)
+    LabeledIndexSuperSet.LabeledIndexSuperSetAddName(builder=builder, name=fb_super_set_name)
+    LabeledIndexSuperSet.LabeledIndexSuperSetAddSets(builder=builder, sets=fb_sets)
+    fb_labeled_index_super_set = LabeledIndexSuperSet.LabeledIndexSuperSetEnd(builder=builder)
+    builder.Finish(fb_labeled_index_super_set)
+    return builder
+
+
+def serialize_labeled_index_super_set(name, np_arr, verbose=False):
+    try:
+        builder = build_labeled_index_super_set(
+            name=name,
+            np_arr=np_arr
+        )
+        buf = bytes(builder.Output())
+    except Exception as e:
+        print(e)
+
+    if verbose is True:
+        print(f"Size: {str(sys.getsizeof(buf))} bytes")
+
+    return buf
+
+
+def build_coordinates_2d(np_x, np_y):
+    builder = flatbuffers.Builder(0)
+    fb_x = add_float32_array(
+        builder=builder,
+        np_arr=np_x
+    )
+    fb_y = add_float32_array(
+        builder=builder,
+        np_arr=np_y
+    )
+    Coordinates2D.Coordinates2DStart(builder)
+    Coordinates2D.Coordinates2DAddX(builder=builder, x=fb_x)
+    Coordinates2D.Coordinates2DAddY(builder=builder, y=fb_y)
+    coordinates_2d = Coordinates2D.Coordinates2DEnd(builder)
+    builder.Finish(coordinates_2d)
+    return builder
 
 
 def serialize_coordinates_2d(np_x, np_y, verbose=False):
