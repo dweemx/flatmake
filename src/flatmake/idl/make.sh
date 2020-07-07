@@ -6,3 +6,4 @@ done
 
 flatc --python -o python schema/main.fbs
 flatc --js --es6-js-export -o js schema/main.fbs
+flatc --ts -o ts schema/main.fbs

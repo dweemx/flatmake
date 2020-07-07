@@ -3,7 +3,6 @@
 import glob
 from setuptools import setup, find_packages
 import os
-import setuptools
 
 with open("README.md") as readme_file:
     readme = readme_file.read()
@@ -20,10 +19,7 @@ setup(
     ],
     description="A variety of utilities to build high-level flatbuffers structures",
     entry_points={"console_scripts": ["flatmake=flatmake.cli:main", ], },
-    install_requires=[
-        'numpy==1.15.4',
-        'flatbuffers==1.12'
-    ],
+    install_requires=["numpy==1.15.4", "flatbuffers==1.12"],
     license="MIT license",
     long_description=readme,
     long_description_content_type="text/markdown",
@@ -31,10 +27,11 @@ setup(
     include_package_data=True,
     keywords="flatmake",
     name="flatmake",
-    packages=setuptools.find_packages(where='src'),
-    package_dir={'': 'src'},
-    py_modules=[os.path.splitext(os.path.basename(path))[0]
-                for path in glob.glob('src/*.py')],
+    packages=find_packages(where="src"),
+    package_dir={"": "src"},
+    py_modules=[
+        os.path.splitext(os.path.basename(path))[0] for path in glob.glob("src/*.py")
+    ],
     setup_requires=[],
     url="https://github.com/dweemx/flatmake",
     version="0.8.1",
