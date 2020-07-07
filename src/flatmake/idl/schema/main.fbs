@@ -8,6 +8,20 @@ table Float32Array {
 	data: [float];
 }
 
+table UInt32Array {
+	data: [uint];
+}
+
+table LabeledIndexSet {
+	name: string;
+	indices: UInt32Array;
+}
+
+table LabeledIndexSuperSet {
+	name: string;
+	sets: [LabeledIndexSet];
+}
+
 table Coordinates2D {
 	x: Float32Array;
 	y: Float32Array;
