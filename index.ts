@@ -27,14 +27,6 @@ export function getLabeledIndexSetByNameFromSuperSet(bytes: ArrayBufferLike, nam
     };
 }
 
-type LabeledIndexSuperSet = {
-    name: string;
-    sets: {
-        name: string;
-        indices: Uint32Array;
-    }[];
-};
-
 export function getLabeledIndexSuperSet(bytes: ArrayBufferLike): LabeledIndexSuperSet {
     const e = Dim.LabeledIndexSuperSet.getRootAsLabeledIndexSuperSet(toByteBuffer(bytes));
     const name = e.name();
@@ -51,7 +43,7 @@ export function getLabeledIndexSuperSet(bytes: ArrayBufferLike): LabeledIndexSup
     };
 }
 
-export function getCoordinates2D(bytes: ArrayBufferLike) {
+export function getCoordinates2D(bytes: ArrayBufferLike): Coordinates2D {
     const e = Dim.Coordinates2D.getRootAsCoordinates2D(toByteBuffer(bytes));
     const x = e.x();
     const y = e.y();
@@ -62,10 +54,6 @@ export function getCoordinates2D(bytes: ArrayBufferLike) {
               y: y.dataArray(),
           };
 }
-
-type ColorArray1D = {
-    color: Uint8Array | null;
-};
 
 export function getColorArray1D(bytes: ArrayBufferLike): ColorArray1D {
     const e = Dim.ColorArray1D.getRootAsColorArray1D(toByteBuffer(bytes));
