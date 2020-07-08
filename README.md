@@ -10,8 +10,7 @@ A variety of utilities to build high-level flatbuffers structures
 
 ## Data Types
 
--   Float32Array
--   UInt32Array
+-   Float32bArray
 -   LabeledIndexSet
 -   LabeledIndexSuperSet
 -   ColorArray1D

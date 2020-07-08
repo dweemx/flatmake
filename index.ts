@@ -6,17 +6,12 @@ function toByteBuffer(bytes: ArrayBufferLike) {
     return new flatbuffers.ByteBuffer(data);
 }
 
-export function getFloat32Array(bytes: ArrayBufferLike) {
-    const e = Dim.Float32Array.getRootAsFloat32Array(toByteBuffer(bytes));
+export function getFloat32bArray(bytes: ArrayBufferLike) {
+    const e = Dim.Float32bArray.getRootAsFloat32bArray(toByteBuffer(bytes));
     return {
         values: e.dataArray(),
     };
 }
-
-type LabeledIndexSet = {
-    name: string;
-    indices: Uint32Array;
-};
 
 export function getLabeledIndexSetByNameFromSuperSet(bytes: ArrayBufferLike, name: string): LabeledIndexSet {
     const e = Dim.LabeledIndexSuperSet.getRootAsLabeledIndexSuperSet(toByteBuffer(bytes));
