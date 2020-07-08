@@ -4,6 +4,7 @@
 
 import flatbuffers
 
+
 class LabeledIndexSet(object):
     __slots__ = ['_tab']
 
@@ -35,6 +36,7 @@ class LabeledIndexSet(object):
             obj.Init(self._tab.Bytes, x)
             return obj
         return None
+
 
 def LabeledIndexSetStart(builder): builder.StartObject(2)
 def LabeledIndexSetAddName(builder, name): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(name), 0)

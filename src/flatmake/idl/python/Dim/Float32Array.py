@@ -4,6 +4,7 @@
 
 import flatbuffers
 
+
 class Float32Array(object):
     __slots__ = ['_tab']
 
@@ -39,6 +40,7 @@ class Float32Array(object):
         if o != 0:
             return self._tab.VectorLen(o)
         return 0
+
 
 def Float32ArrayStart(builder): builder.StartObject(1)
 def Float32ArrayAddData(builder, data): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(data), 0)

@@ -4,6 +4,7 @@
 
 import flatbuffers
 
+
 class RGBTripleArray(object):
     __slots__ = ['_tab']
 
@@ -50,6 +51,7 @@ class RGBTripleArray(object):
             obj.Init(self._tab.Bytes, x)
             return obj
         return None
+
 
 def RGBTripleArrayStart(builder): builder.StartObject(3)
 def RGBTripleArrayAddR(builder, r): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(r), 0)

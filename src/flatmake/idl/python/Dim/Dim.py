@@ -4,6 +4,7 @@
 
 import flatbuffers
 
+
 class Dim(object):
     __slots__ = ['_tab']
 
@@ -72,6 +73,7 @@ class Dim(object):
             obj.Init(self._tab.Bytes, x)
             return obj
         return None
+
 
 def DimStart(builder): builder.StartObject(5)
 def DimAddUbyteArray(builder, ubyteArray): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(ubyteArray), 0)

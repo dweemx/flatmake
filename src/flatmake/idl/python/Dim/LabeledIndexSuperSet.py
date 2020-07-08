@@ -4,6 +4,7 @@
 
 import flatbuffers
 
+
 class LabeledIndexSuperSet(object):
     __slots__ = ['_tab']
 
@@ -44,6 +45,7 @@ class LabeledIndexSuperSet(object):
         if o != 0:
             return self._tab.VectorLen(o)
         return 0
+
 
 def LabeledIndexSuperSetStart(builder): builder.StartObject(2)
 def LabeledIndexSuperSetAddName(builder, name): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(name), 0)

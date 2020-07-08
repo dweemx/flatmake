@@ -4,6 +4,7 @@
 
 import flatbuffers
 
+
 class ColorArray1D(object):
     __slots__ = ['_tab']
 
@@ -28,6 +29,7 @@ class ColorArray1D(object):
             obj.Init(self._tab.Bytes, x)
             return obj
         return None
+
 
 def ColorArray1DStart(builder): builder.StartObject(1)
 def ColorArray1DAddColor(builder, color): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(color), 0)

@@ -4,6 +4,7 @@
 
 import flatbuffers
 
+
 class Coordinates2D(object):
     __slots__ = ['_tab']
 
@@ -39,6 +40,7 @@ class Coordinates2D(object):
             obj.Init(self._tab.Bytes, x)
             return obj
         return None
+
 
 def Coordinates2DStart(builder): builder.StartObject(2)
 def Coordinates2DAddX(builder, x): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(x), 0)
