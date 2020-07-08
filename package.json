@@ -1,29 +1,29 @@
 {
-  "name": "flatmake",
-  "version": "0.8.1",
-  "description": "A variety of utilities to build high-level flatbuffers structures",
-  "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dweemx/flatmake.git"
-  },
-  "author": "Maxime De Waegeneer",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/dweemx/flatmake/issues"
-  },
-  "homepage": "https://github.com/dweemx/flatmake#readme",
-  "dependencies": {
-    "@types/flatbuffers": "^1.10.0",
-    "flatbuffers": "^1.11.0"
-  },
-  "devDependencies": {
-    "typescript": "^3.9.6"
-  }
+    "name": "flatmake",
+    "version": "0.9.0",
+    "description": "A variety of utilities to build high-level flatbuffers structures",
+    "main": "index.ts",
+    "directories": {
+        "test": "tests"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dweemx/flatmake.git"
+    },
+    "author": "Maxime De Waegeneer",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/dweemx/flatmake/issues"
+    },
+    "homepage": "https://github.com/dweemx/flatmake#readme",
+    "dependencies": {
+        "@types/flatbuffers": "^1.10.0",
+        "flatbuffers": "^1.11.0"
+    },
+    "devDependencies": {
+        "typescript": "^3.9.6"
+    }
 }
