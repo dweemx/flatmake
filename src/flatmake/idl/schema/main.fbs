@@ -4,17 +4,17 @@ table UByteArray {
 	data: [ubyte];
 }
 
-table Float32Array {
+table Float32bArray {
 	data: [float];
 }
 
-table UInt32Array {
+table UInt32bArray {
 	data: [uint];
 }
 
 table LabeledIndexSet {
 	name: string;
-	indices: UInt32Array;
+	indices: UInt32bArray;
 }
 
 table LabeledIndexSuperSet {
@@ -23,8 +23,8 @@ table LabeledIndexSuperSet {
 }
 
 table Coordinates2D {
-	x: Float32Array;
-	y: Float32Array;
+	x: Float32bArray;
+	y: Float32bArray;
 }
 
 table RGBTripleArray {
@@ -39,7 +39,7 @@ table ColorArray1D {
 
 table Dim {
     ubyteArray: UByteArray;
-    float32Array: Float32Array;
+    Float32bArray: Float32bArray;
     coordinates2D: Coordinates2D;
 	colorArray1D: ColorArray1D;
 	rgbTripleArray: RGBTripleArray;

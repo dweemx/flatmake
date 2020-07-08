@@ -3,8 +3,8 @@ import numpy as np
 import pandas as pd
 import flatbuffers
 from flatmake.idl.python.Dim import UByteArray
-from flatmake.idl.python.Dim import Float32Array
-from flatmake.idl.python.Dim import UInt32Array
+from flatmake.idl.python.Dim import Float32bArray
+from flatmake.idl.python.Dim import UInt32bArray
 from flatmake.idl.python.Dim import LabeledIndexSet
 from flatmake.idl.python.Dim import LabeledIndexSuperSet
 from flatmake.idl.python.Dim import Coordinates2D
@@ -21,24 +21,24 @@ def add_ubyte_array(builder, np_arr):
 
 def add_float32_array(builder, np_arr):
     arr = builder.CreateNumpyVector(x=np_arr.astype(np.float32))
-    Float32Array.Float32ArrayStart(builder)
-    Float32Array.Float32ArrayAddData(builder=builder, data=arr)
-    return Float32Array.Float32ArrayEnd(builder)
+    Float32bArray.Float32bArrayStart(builder)
+    Float32bArray.Float32bArrayAddData(builder=builder, data=arr)
+    return Float32bArray.Float32bArrayEnd(builder)
 
 
 def add_uint32_array(builder, np_arr):
     arr = builder.CreateNumpyVector(x=np_arr.astype(np.uint32))
-    UInt32Array.UInt32ArrayStart(builder)
-    UInt32Array.UInt32ArrayAddData(builder=builder, data=arr)
-    return UInt32Array.UInt32ArrayEnd(builder)
+    UInt32bArray.UInt32bArrayStart(builder)
+    UInt32bArray.UInt32bArrayAddData(builder=builder, data=arr)
+    return UInt32bArray.UInt32bArrayEnd(builder)
 
 
 def build_float32_array(np_arr):
     builder = flatbuffers.Builder(0)
     arr = builder.CreateNumpyVector(np_arr)
-    Float32Array.Float32ArrayStart(builder)
-    Float32Array.Float32ArrayAddData(builder=builder, data=arr)
-    float32_array = Float32Array.Float32ArrayEnd(builder)
+    Float32bArray.Float32bArrayStart(builder)
+    Float32bArray.Float32bArrayAddData(builder=builder, data=arr)
+    float32_array = Float32bArray.Float32bArrayEnd(builder)
     builder.Finish(float32_array)
     return builder
 

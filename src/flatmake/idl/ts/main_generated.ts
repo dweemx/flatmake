@@ -116,16 +116,16 @@ export namespace Dim {
  * @constructor
  */
 export namespace Dim {
-    export class Float32Array {
+    export class Float32bArray {
         bb: flatbuffers.ByteBuffer | null = null;
 
         bb_pos: number = 0;
         /**
          * @param number i
          * @param flatbuffers.ByteBuffer bb
-         * @returns Float32Array
+         * @returns Float32bArray
          */
-        __init(i: number, bb: flatbuffers.ByteBuffer): Float32Array {
+        __init(i: number, bb: flatbuffers.ByteBuffer): Float32bArray {
             this.bb_pos = i;
             this.bb = bb;
             return this;
@@ -133,11 +133,11 @@ export namespace Dim {
 
         /**
          * @param flatbuffers.ByteBuffer bb
-         * @param Float32Array= obj
-         * @returns Float32Array
+         * @param Float32bArray= obj
+         * @returns Float32bArray
          */
-        static getRootAsFloat32Array(bb: flatbuffers.ByteBuffer, obj?: Float32Array): Float32Array {
-            return (obj || new Float32Array()).__init(bb.readInt32(bb.position()) + bb.position(), bb);
+        static getRootAsFloat32bArray(bb: flatbuffers.ByteBuffer, obj?: Float32bArray): Float32bArray {
+            return (obj || new Float32bArray()).__init(bb.readInt32(bb.position()) + bb.position(), bb);
         }
 
         /**
@@ -174,7 +174,7 @@ export namespace Dim {
         /**
          * @param flatbuffers.Builder builder
          */
-        static startFloat32Array(builder: flatbuffers.Builder) {
+        static startFloat32bArray(builder: flatbuffers.Builder) {
             builder.startObject(1);
         }
 
@@ -211,15 +211,15 @@ export namespace Dim {
          * @param flatbuffers.Builder builder
          * @returns flatbuffers.Offset
          */
-        static endFloat32Array(builder: flatbuffers.Builder): flatbuffers.Offset {
+        static endFloat32bArray(builder: flatbuffers.Builder): flatbuffers.Offset {
             var offset = builder.endObject();
             return offset;
         }
 
-        static createFloat32Array(builder: flatbuffers.Builder, dataOffset: flatbuffers.Offset): flatbuffers.Offset {
-            Float32Array.startFloat32Array(builder);
-            Float32Array.addData(builder, dataOffset);
-            return Float32Array.endFloat32Array(builder);
+        static createFloat32bArray(builder: flatbuffers.Builder, dataOffset: flatbuffers.Offset): flatbuffers.Offset {
+            Float32bArray.startFloat32bArray(builder);
+            Float32bArray.addData(builder, dataOffset);
+            return Float32bArray.endFloat32bArray(builder);
         }
     }
 }
@@ -227,16 +227,16 @@ export namespace Dim {
  * @constructor
  */
 export namespace Dim {
-    export class UInt32Array {
+    export class UInt32bArray {
         bb: flatbuffers.ByteBuffer | null = null;
 
         bb_pos: number = 0;
         /**
          * @param number i
          * @param flatbuffers.ByteBuffer bb
-         * @returns UInt32Array
+         * @returns UInt32bArray
          */
-        __init(i: number, bb: flatbuffers.ByteBuffer): UInt32Array {
+        __init(i: number, bb: flatbuffers.ByteBuffer): UInt32bArray {
             this.bb_pos = i;
             this.bb = bb;
             return this;
@@ -244,11 +244,11 @@ export namespace Dim {
 
         /**
          * @param flatbuffers.ByteBuffer bb
-         * @param UInt32Array= obj
-         * @returns UInt32Array
+         * @param UInt32bArray= obj
+         * @returns UInt32bArray
          */
-        static getRootAsUInt32Array(bb: flatbuffers.ByteBuffer, obj?: UInt32Array): UInt32Array {
-            return (obj || new UInt32Array()).__init(bb.readInt32(bb.position()) + bb.position(), bb);
+        static getRootAsUInt32bArray(bb: flatbuffers.ByteBuffer, obj?: UInt32bArray): UInt32bArray {
+            return (obj || new UInt32bArray()).__init(bb.readInt32(bb.position()) + bb.position(), bb);
         }
 
         /**
@@ -285,7 +285,7 @@ export namespace Dim {
         /**
          * @param flatbuffers.Builder builder
          */
-        static startUInt32Array(builder: flatbuffers.Builder) {
+        static startUInt32bArray(builder: flatbuffers.Builder) {
             builder.startObject(1);
         }
 
@@ -322,15 +322,15 @@ export namespace Dim {
          * @param flatbuffers.Builder builder
          * @returns flatbuffers.Offset
          */
-        static endUInt32Array(builder: flatbuffers.Builder): flatbuffers.Offset {
+        static endUInt32bArray(builder: flatbuffers.Builder): flatbuffers.Offset {
             var offset = builder.endObject();
             return offset;
         }
 
-        static createUInt32Array(builder: flatbuffers.Builder, dataOffset: flatbuffers.Offset): flatbuffers.Offset {
-            UInt32Array.startUInt32Array(builder);
-            UInt32Array.addData(builder, dataOffset);
-            return UInt32Array.endUInt32Array(builder);
+        static createUInt32bArray(builder: flatbuffers.Builder, dataOffset: flatbuffers.Offset): flatbuffers.Offset {
+            UInt32bArray.startUInt32bArray(builder);
+            UInt32bArray.addData(builder, dataOffset);
+            return UInt32bArray.endUInt32bArray(builder);
         }
     }
 }
@@ -374,13 +374,13 @@ export namespace Dim {
         }
 
         /**
-         * @param Dim.UInt32Array= obj
-         * @returns Dim.UInt32Array|null
+         * @param Dim.UInt32bArray= obj
+         * @returns Dim.UInt32bArray|null
          */
-        indices(obj?: Dim.UInt32Array): Dim.UInt32Array | null {
+        indices(obj?: Dim.UInt32bArray): Dim.UInt32bArray | null {
             var offset = this.bb!.__offset(this.bb_pos, 6);
             return offset
-                ? (obj || new Dim.UInt32Array()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
+                ? (obj || new Dim.UInt32bArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
                 : null;
         }
 
@@ -587,24 +587,24 @@ export namespace Dim {
         }
 
         /**
-         * @param Dim.Float32Array= obj
-         * @returns Dim.Float32Array|null
+         * @param Dim.Float32bArray= obj
+         * @returns Dim.Float32bArray|null
          */
-        x(obj?: Dim.Float32Array): Dim.Float32Array | null {
+        x(obj?: Dim.Float32bArray): Dim.Float32bArray | null {
             var offset = this.bb!.__offset(this.bb_pos, 4);
             return offset
-                ? (obj || new Dim.Float32Array()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
+                ? (obj || new Dim.Float32bArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
                 : null;
         }
 
         /**
-         * @param Dim.Float32Array= obj
-         * @returns Dim.Float32Array|null
+         * @param Dim.Float32bArray= obj
+         * @returns Dim.Float32bArray|null
          */
-        y(obj?: Dim.Float32Array): Dim.Float32Array | null {
+        y(obj?: Dim.Float32bArray): Dim.Float32bArray | null {
             var offset = this.bb!.__offset(this.bb_pos, 6);
             return offset
-                ? (obj || new Dim.Float32Array()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
+                ? (obj || new Dim.Float32bArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
                 : null;
         }
 
@@ -877,13 +877,13 @@ export namespace Dim {
         }
 
         /**
-         * @param Dim.Float32Array= obj
-         * @returns Dim.Float32Array|null
+         * @param Dim.Float32bArray= obj
+         * @returns Dim.Float32bArray|null
          */
-        float32Array(obj?: Dim.Float32Array): Dim.Float32Array | null {
+        Float32bArray(obj?: Dim.Float32bArray): Dim.Float32bArray | null {
             var offset = this.bb!.__offset(this.bb_pos, 6);
             return offset
-                ? (obj || new Dim.Float32Array()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
+                ? (obj || new Dim.Float32bArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
                 : null;
         }
 
@@ -937,10 +937,10 @@ export namespace Dim {
 
         /**
          * @param flatbuffers.Builder builder
-         * @param flatbuffers.Offset float32ArrayOffset
+         * @param flatbuffers.Offset Float32bArrayOffset
          */
-        static addFloat32Array(builder: flatbuffers.Builder, float32ArrayOffset: flatbuffers.Offset) {
-            builder.addFieldOffset(1, float32ArrayOffset, 0);
+        static addFloat32bArray(builder: flatbuffers.Builder, Float32bArrayOffset: flatbuffers.Offset) {
+            builder.addFieldOffset(1, Float32bArrayOffset, 0);
         }
 
         /**
@@ -987,14 +987,14 @@ export namespace Dim {
         static createDim(
             builder: flatbuffers.Builder,
             ubyteArrayOffset: flatbuffers.Offset,
-            float32ArrayOffset: flatbuffers.Offset,
+            Float32bArrayOffset: flatbuffers.Offset,
             coordinates2DOffset: flatbuffers.Offset,
             colorArray1DOffset: flatbuffers.Offset,
             rgbTripleArrayOffset: flatbuffers.Offset
         ): flatbuffers.Offset {
             Dim.startDim(builder);
             Dim.addUbyteArray(builder, ubyteArrayOffset);
-            Dim.addFloat32Array(builder, float32ArrayOffset);
+            Dim.addFloat32bArray(builder, Float32bArrayOffset);
             Dim.addCoordinates2D(builder, coordinates2DOffset);
             Dim.addColorArray1D(builder, colorArray1DOffset);
             Dim.addRgbTripleArray(builder, rgbTripleArrayOffset);
