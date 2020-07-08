@@ -20,14 +20,14 @@ def add_ubyte_array(builder, np_arr):
 
 
 def add_float32_array(builder, np_arr):
-    arr = builder.CreateNumpyVector(x=np_arr)
+    arr = builder.CreateNumpyVector(x=np_arr.astype(np.float32))
     Float32Array.Float32ArrayStart(builder)
     Float32Array.Float32ArrayAddData(builder=builder, data=arr)
     return Float32Array.Float32ArrayEnd(builder)
 
 
 def add_uint32_array(builder, np_arr):
-    arr = builder.CreateNumpyVector(x=np_arr)
+    arr = builder.CreateNumpyVector(x=np_arr.astype(np.uint32))
     UInt32Array.UInt32ArrayStart(builder)
     UInt32Array.UInt32ArrayAddData(builder=builder, data=arr)
     return UInt32Array.UInt32ArrayEnd(builder)
@@ -105,7 +105,7 @@ def build_labeled_index_super_set(name, np_arr, verbose=False):
     df = pd.DataFrame({"set": np_arr})
     groups = df.groupby("set")
     num_groups = len(groups)
-    fb_labeled_index_sets = []    
+    fb_labeled_index_sets = []
     for group_name, group in groups:
         fb_labeled_index_set = add_labeled_index_set(
             builder=builder,
