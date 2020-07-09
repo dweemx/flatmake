@@ -18,7 +18,7 @@ setup(
         "Programming Language :: Python :: 3",
     ],
     description="A variety of utilities to build high-level flatbuffers structures",
-    entry_points={"console_scripts": ["flatmake=flatmake.cli:main",],},
+    entry_points={"console_scripts": ["flatmake=flatmake.cli:main", ], },
     install_requires=["numpy==1.15.4", "pandas==1.0.3", "flatbuffers==1.12.0"],
     license="MIT license",
     long_description=readme,
@@ -34,6 +34,6 @@ setup(
     ],
     setup_requires=[],
     url="https://github.com/dweemx/flatmake",
-    version="0.9.1",
+    version="0.9.2",
     zip_safe=False,
 )
