@@ -379,7 +379,7 @@ export namespace Dim {
         indices(obj?: Dim.UInt32bArray): Dim.UInt32bArray | null {
             var offset = this.bb!.__offset(this.bb_pos, 6);
             return offset
-                ? (obj || new Dim.UInt32bArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
+                ? (obj || new UInt32bArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
                 : null;
         }
 
@@ -477,7 +477,7 @@ export namespace Dim {
         sets(index: number, obj?: Dim.LabeledIndexSet): Dim.LabeledIndexSet | null {
             var offset = this.bb!.__offset(this.bb_pos, 6);
             return offset
-                ? (obj || new Dim.LabeledIndexSet()).__init(
+                ? (obj || new LabeledIndexSet()).__init(
                       this.bb!.__indirect(this.bb!.__vector(this.bb_pos + offset) + index * 4),
                       this.bb!
                   )
@@ -592,7 +592,7 @@ export namespace Dim {
         x(obj?: Dim.Float32bArray): Dim.Float32bArray | null {
             var offset = this.bb!.__offset(this.bb_pos, 4);
             return offset
-                ? (obj || new Dim.Float32bArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
+                ? (obj || new Float32bArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
                 : null;
         }
 
@@ -603,7 +603,7 @@ export namespace Dim {
         y(obj?: Dim.Float32bArray): Dim.Float32bArray | null {
             var offset = this.bb!.__offset(this.bb_pos, 6);
             return offset
-                ? (obj || new Dim.Float32bArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
+                ? (obj || new Float32bArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
                 : null;
         }
 
@@ -686,7 +686,7 @@ export namespace Dim {
         r(obj?: Dim.UByteArray): Dim.UByteArray | null {
             var offset = this.bb!.__offset(this.bb_pos, 4);
             return offset
-                ? (obj || new Dim.UByteArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
+                ? (obj || new UByteArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
                 : null;
         }
 
@@ -697,7 +697,7 @@ export namespace Dim {
         g(obj?: Dim.UByteArray): Dim.UByteArray | null {
             var offset = this.bb!.__offset(this.bb_pos, 6);
             return offset
-                ? (obj || new Dim.UByteArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
+                ? (obj || new UByteArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
                 : null;
         }
 
@@ -708,7 +708,7 @@ export namespace Dim {
         b(obj?: Dim.UByteArray): Dim.UByteArray | null {
             var offset = this.bb!.__offset(this.bb_pos, 8);
             return offset
-                ? (obj || new Dim.UByteArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
+                ? (obj || new UByteArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
                 : null;
         }
 
@@ -801,7 +801,7 @@ export namespace Dim {
         color(obj?: Dim.UByteArray): Dim.UByteArray | null {
             var offset = this.bb!.__offset(this.bb_pos, 4);
             return offset
-                ? (obj || new Dim.UByteArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
+                ? (obj || new UByteArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
                 : null;
         }
 
@@ -871,7 +871,7 @@ export namespace Dim {
         ubyteArray(obj?: Dim.UByteArray): Dim.UByteArray | null {
             var offset = this.bb!.__offset(this.bb_pos, 4);
             return offset
-                ? (obj || new Dim.UByteArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
+                ? (obj || new UByteArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
                 : null;
         }
 
@@ -882,7 +882,7 @@ export namespace Dim {
         float32bArray(obj?: Dim.Float32bArray): Dim.Float32bArray | null {
             var offset = this.bb!.__offset(this.bb_pos, 6);
             return offset
-                ? (obj || new Dim.Float32bArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
+                ? (obj || new Float32bArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
                 : null;
         }
 
@@ -893,7 +893,7 @@ export namespace Dim {
         coordinates2d(obj?: Dim.Coordinates2D): Dim.Coordinates2D | null {
             var offset = this.bb!.__offset(this.bb_pos, 8);
             return offset
-                ? (obj || new Dim.Coordinates2D()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
+                ? (obj || new Coordinates2D()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
                 : null;
         }
 
@@ -904,7 +904,7 @@ export namespace Dim {
         colorArray1d(obj?: Dim.ColorArray1D): Dim.ColorArray1D | null {
             var offset = this.bb!.__offset(this.bb_pos, 10);
             return offset
-                ? (obj || new Dim.ColorArray1D()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
+                ? (obj || new ColorArray1D()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
                 : null;
         }
 
@@ -915,7 +915,7 @@ export namespace Dim {
         rgbTripleArray(obj?: Dim.RGBTripleArray): Dim.RGBTripleArray | null {
             var offset = this.bb!.__offset(this.bb_pos, 12);
             return offset
-                ? (obj || new Dim.RGBTripleArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
+                ? (obj || new RGBTripleArray()).__init(this.bb!.__indirect(this.bb_pos + offset), this.bb!)
                 : null;
         }
 
