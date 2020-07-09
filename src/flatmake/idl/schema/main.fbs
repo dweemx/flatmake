@@ -38,11 +38,11 @@ table ColorArray1D {
 }
 
 table Dim {
-    ubyteArray: UByteArray;
-    Float32bArray: Float32bArray;
-    coordinates2D: Coordinates2D;
-	colorArray1D: ColorArray1D;
-	rgbTripleArray: RGBTripleArray;
+    ubyte_array: UByteArray;
+    float32b_array: Float32bArray;
+    coordinates_2d: Coordinates2D;
+	color_array_1d: ColorArray1D;
+	rgb_triple_array: RGBTripleArray;
 }
 
 root_type Dim;
