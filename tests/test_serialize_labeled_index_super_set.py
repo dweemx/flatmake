@@ -36,3 +36,27 @@ def test_indices():
         if "s" == set_name_deserialized:
             indices = set_deserialized.Indices().DataAsNumpy()
             assert np.array_equal(test_np_s_indices, indices)
+
+
+def test_indices_with_numbers():
+    test_np_arr = np.array([1, 1, 2, 2, 3, 3, 3, 1])
+    test_np_t_indices = np.array([0, 1, 7])
+    test_np_e_indices = np.array([2, 3])
+    test_np_s_indices = np.array([4, 5, 6])
+    test_name = "test_liss"
+    builder = flatmake.build_labeled_index_super_set(name=test_name, np_arr=test_np_arr)
+    output = builder.Output()
+    liss = LabeledIndexSuperSet.LabeledIndexSuperSet()
+    liss_root = liss.GetRootAsLabeledIndexSuperSet(output, 0)
+    for i in range(0, liss_root.SetsLength()):
+        set_deserialized = liss_root.Sets(i)
+        set_name_deserialized = set_deserialized.Name().decode("utf-8")
+        if "1" == set_name_deserialized:
+            indices = set_deserialized.Indices().DataAsNumpy()
+            assert np.array_equal(test_np_t_indices, indices)
+        if "2" == set_name_deserialized:
+            indices = set_deserialized.Indices().DataAsNumpy()
+            assert np.array_equal(test_np_e_indices, indices)
+        if "3" == set_name_deserialized:
+            indices = set_deserialized.Indices().DataAsNumpy()
+            assert np.array_equal(test_np_s_indices, indices)

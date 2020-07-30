@@ -59,7 +59,10 @@ def serialize_float32_array(np_arr, verbose=False):
 
 
 def add_labeled_index_set(builder, name, np_arr):
-    fb_index_set_name = builder.CreateString(name)
+
+    if not isinstance(name, int) and not isinstance(name, str):
+        raise Exception(f"Serializing a LabeledIndexSet labeled with a {type(name)} is not supported.")
+    fb_index_set_name = builder.CreateString(s=str(object=name))
     fb_uint32_arr = add_uint32_array(
         builder=builder,
         np_arr=np_arr
@@ -101,7 +104,7 @@ def build_labeled_index_super_set(name, np_arr, verbose=False):
     # Source: https://google.github.io/flatbuffers/md__java_usage.html
     # Everything else (other tables, strings, vectors) MUST be created before the start of the table they are referenced in.
     builder = flatbuffers.Builder(0)
-    fb_super_set_name = builder.CreateString(name)
+    fb_super_set_name = builder.CreateString(s=name)
     df = pd.DataFrame({"set": np_arr})
     groups = df.groupby("set")
     num_groups = len(groups)
