@@ -34,6 +34,6 @@ setup(
     ],
     setup_requires=[],
     url="https://github.com/dweemx/flatmake",
-    version="0.9.3",
+    version="0.9.4",
     zip_safe=False,
 )
