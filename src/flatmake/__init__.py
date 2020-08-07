@@ -4,4 +4,4 @@ from .flatmake import *
 
 __author__ = """Maxime De Waegeneer"""
 __email__ = 'mdewaegeneer@gmail.com'
-__version__ = '0.9.3'
+__version__ = '0.9.5'
