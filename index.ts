@@ -35,6 +35,14 @@ export function getFloat32bArray(bytes: ArrayBufferLike) {
     };
 }
 
+export function getLabeledIndexSet(bytes: ArrayBufferLike): LabeledIndexSet {
+    const e = Dim.LabeledIndexSet.getRootAsLabeledIndexSet(toByteBuffer(bytes));
+    return {
+        name: e.name(),
+        indices: e.indices().dataArray(),
+    };
+}
+
 export function getLabeledIndexSetByNameFromSuperSet(bytes: ArrayBufferLike, name: string): LabeledIndexSet {
     const e = Dim.LabeledIndexSuperSet.getRootAsLabeledIndexSuperSet(toByteBuffer(bytes));
     const setIndex = [...new Array<number>(e.setsLength())].filter((index) => {
